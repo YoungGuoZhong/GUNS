@@ -1,0 +1,74 @@
+eclipse部署guns：
+	1、import -> 搜索maven -> Existing Maven Projects -> 选择guns根目录
+	2、修改配置文件：
+		spring
+			datasource ： 修改为本人的数据库连接
+		guns
+			flowable ：修改为本人的数据库连接
+			muti-datasource：修改为本人的数据库连接
+			
+	3、启动guns工程：
+		3.1 运行java文件启动
+			3.1.1 src/java/main/com/stylefeng/guns/GunsApplication
+			3.1.2 run as -> java application
+			
+		3.2 运行jar文件启动
+			3.2.1 编译打包成jar文件
+				a) 找到 guns-parent工程
+				b) run as -> maven build -> 执行如下命令
+				c) clean package -Dmaven.test.skip=true
+				
+			3.2.2 执行jar文件
+				java -jar guns-admin-1.0.0-SNAPSHOT.jar
+		
+		3.3 运行war文件启动
+		  3.3.1 修改guns-admin中的pom文件
+		  	packaging -> war
+		  	
+		  3.3.2 编译打包成jar文件
+				a) 找到 guns-parent工程
+				b) run as -> maven build -> 执行如下命令
+				c) clean package -Dmaven.test.skip=true
+				
+			3.3.3 执行war文件
+				a) 将war文件放置在tomcat中的webapps目录下
+				b) 将guns-admin-1.0.0-SNAPSHOT.war修改为ROOT.war
+				c) 启动tomcat即可
+						%TOMCAT_HOME%/bin/startup.bat
+
+1、使用idea进行open -> guns-parent
+2、修改数据源：
+		目标：guns-admin\src\main\resources\application.yml
+		修改内容：
+			2.1 spring.datasource
+			2.2 guns.flowable.datasource
+			2.3 guns.flowable.muti-datasource
+		
+		
+3、启动guns：
+		3.1 运行java文件【spring boot】
+			运行guns-admin\src\main\java\com\stylefeng\guns\GunsApplication.java
+			
+		3.2 直接运行jar文件
+			3.2.1 对guns进行打包部署
+				3.2.1.1 找到guns-parent
+				3.2.1.2 运行命令 
+					mvn clean package -Dmaven.test.skip=true
+				3.2.1.3 拷贝jar包至运行目录
+				3.2.1.4 运行命令
+					java -jar guns-admin-1.0.0-SNAPSHOT.jar
+					
+		3.3 运行war包
+			准备：修改guns-admin中的pom文件打包方式
+					
+			3.3.1 对guns进行打包部署
+				3.3.1.1 找到guns-parent
+				3.3.1.2 运行命令 
+					mvn clean package -Dmaven.test.skip=true
+				3.3.1.3 拷贝war包至web服务器tomcat的webapps中
+				3.3.1.4 将war包名称修改为ROOT.war
+				3.3.1.5 启动tomcat
+					%TOMCAT_HOME%/bin/startup.bat
+				
+			
+			
